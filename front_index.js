@@ -38,7 +38,6 @@ const run  = async () => {
     const section = document.querySelector("section")
     const articleLatest = section.querySelector("article")
     section.insertBefore(article, articleLatest)
-
 }
 
 
