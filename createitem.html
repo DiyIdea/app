@@ -1,0 +1,133 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>아이템 제작 페이지</title>
+    <style>
+      body {
+        background-color: #f6f6f6;
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+        line-height: 1.5;
+        padding: 0;
+        margin: 0;
+      }
+      #header {
+        background-color: #fff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        max-width: 400px;
+        margin: 100px auto;
+        padding: 20px;
+      }
+      #header h1 {
+        font-size: 28px;
+        margin-bottom: 20px;
+      }
+      #header label {
+        display: block;
+        margin-bottom: 10px;
+      }
+      #header input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+        font-size: 16px;
+      }
+      #header textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+        font-size: 16px;
+      }
+      #header select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+        font-size: 16px;
+      }
+      #header button {
+        background-color: #4caf50;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+      #header button:hover {
+        background-color: #3e8e41;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="header">
+      <h1>아이템 제작 페이지</h1>
+      <form>
+        <label for="title">제목:</label>
+        <input type="text" id="title" name="title" required />
+        <label for="image">그림:</label>
+        <input type="file" id="image" name="image" accept="image/*" />
+        <label for="content">내용:</label>
+        <textarea id="content" name="content" rows="5" required></textarea>
+        <label for="field">모집 분야:</label>
+        <div id="major">
+                <select id="combo-box">
+                  <option >선택하세요.</option>
+                  <option value="환경에너지공학">환경에너지공학</option>
+                  <option value="중국어과">중국어과</option>
+                  <option value="관광경영학과">관광경영학과</option>
+                  <option value="소프트웨어학과">소프트웨어학과</option>
+                </select>
+		          <div id="combo-items-container"></div>
+	      </div>
+        <button type="submit">게시</button>
+      </form>
+    </div>
+    <script>
+		const comboBox = document.getElementById("combo-box");
+		const comboItemsContainer = document.getElementById("combo-items-container");
+
+		comboBox.addEventListener("change", () => {
+			const selectedItem = comboBox.value;
+			const itemIndex = comboBox.selectedIndex;
+			if (selectedItem !== "") {
+				const comboItem = document.createElement("div");
+				comboItem.classList.add("combo-item");
+
+				const label = document.createElement("label");
+				label.classList.add("combo-label");
+				label.textContent = selectedItem;
+				comboItem.appendChild(label);
+
+				const input = document.createElement("input");
+				input.classList.add("combo-input");
+				input.setAttribute("type", "number");
+				input.setAttribute("placeholder", "모집인원");
+				comboItem.appendChild(input);
+
+				const removeButton = document.createElement("button");
+				removeButton.classList.add("combo-remove");
+				removeButton.textContent = "삭제";
+				removeButton.addEventListener("click", () => {
+					comboBox.add(new Option(selectedItem, selectedItem), itemIndex);
+					comboItem.remove();
+				});
+				comboItem.appendChild(removeButton);
+
+				comboItemsContainer.appendChild(comboItem);
+				comboBox.remove(itemIndex);
+			  }
+		  });
+	  </script>
+  </body>
+</html>
